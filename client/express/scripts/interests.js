@@ -18,19 +18,25 @@ load_interests = function () {
         var remove = document.createElement("a");
         var modifyIcon = document.createElement("i");
         modifyIcon.className = "bi bi-pen";
+        modifyIcon.dataset.id = liItem.dataset.id;
+        modifyIcon.dataset.name = liItem.dataset.name;
         var removeIcon = document.createElement("i");
         removeIcon.className = "bi bi-trash";
+        removeIcon.dataset.id = liItem.dataset.id;
+        removeIcon.dataset.name = liItem.dataset.name;
         modify.appendChild(modifyIcon);
         remove.appendChild(removeIcon);
 
         modify.title = "Edit";
         modify.href = "";
+        modify.id = "modify_interest";
         modify.dataset.id = liItem.dataset.id;
         modify.dataset.name = liItem.dataset.name;
         modify.className = "btn btn-sm btn-secondary mx-2";
 
         remove.title = "Delete";
         remove.href = "";
+        modify.id = "delete_interest";
         remove.dataset.id = liItem.dataset.id;
         remove.className = "btn btn-sm btn-danger";
 
@@ -38,7 +44,15 @@ load_interests = function () {
         liItem.appendChild(modify);
         liItem.appendChild(remove);
         document.getElementById("interests").appendChild(liItem);
-        console.log(remove)
+
+        modify.onclick = function (e) {
+          e.preventDefault();
+          console.log("Edit: " + e.target.getAttribute("data-id"));
+        };
+        remove.onclick = function (e) {
+          e.preventDefault();
+          console.log("Delete: " + e.target.getAttribute("data-id"));
+        };
       }
     });
 };
