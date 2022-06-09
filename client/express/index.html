@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <title>Single Page App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <nav class="navbar bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">AJAX API Client</span>
+        </div>
+      </nav>
+      <h3>Create interest</h3>
+
+<form id = 'interest_form'>
+  <div class="input-group">
+    <div class="input-group-text" id="lb_name">Name</div>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      placeholder="Enter Name"
+    />
+    <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+<br />
+<!--
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Last 5 interests</h3>
+    <ol class="list-group list-group-flush list-group-numbered" id="interests">
+      {% for interest in interests %}
+      <li class="list-group-item">{{ interest.name }}</li>
+      {% endfor %}
+    </ol>
+  </div>
+</div>
+-->
+<script src="scripts/interests.js"></script>   
+      </div>
+    </div>
+  </body>
+</html>
