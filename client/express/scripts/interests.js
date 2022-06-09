@@ -52,6 +52,18 @@ load_interests = function () {
         remove.onclick = function (e) {
           e.preventDefault();
           console.log("Delete: " + e.target.getAttribute("data-id"));
+          fetch(
+            `http://localhost:8080/interests/${e.target.getAttribute(
+              "data-id"
+            )}`,
+            { method: "DELETE" }
+          )
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (jsonResponse) {
+              load_interests();
+            });
         };
       }
     });
