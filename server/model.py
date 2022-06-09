@@ -50,7 +50,7 @@ class Interest(db.Model, AppModel):
         return f'{self.id} - {self.name}'
 
 
-class Student(db.Model, FyyurSession):
+class Student(db.Model, AppModel):
     __tablename__ = 'students'
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(), unique=True, nullable=False)

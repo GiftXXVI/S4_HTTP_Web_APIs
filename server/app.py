@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request
+from flask import Flask, redirect, request, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
 from model import db, migrate, config, Student, Interest
@@ -19,6 +19,7 @@ def create_app() -> Flask:
 app = create_app()
 app.register_blueprint(interests_blueprint)
 app.register_blueprint(students_blueprint)
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 
 @app.after_request
 def after_request(response):
@@ -99,14 +100,14 @@ def error_500(error):
     }), 500
 
 
-@app.errorhandler(AuthError)
-def auth_error(error):
-    error_data = error.format()
-    return jsonify({
-        'success': False,
-        'error': error_data['code'],
-        'message': error_data['message']
-    }), error_data['code']
+#@app.errorhandler(AuthError)
+#def auth_error(error):
+#    error_data = error.format()
+#    return jsonify({
+#        'success': False,
+#        'error': error_data['code'],
+#        'message': error_data['message']
+#    }), error_data['code']
 
 
 if __name__ == '__main__':
