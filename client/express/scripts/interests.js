@@ -104,9 +104,9 @@ document.getElementById("interest_form").onsubmit = function (e) {
 
 document.getElementById("submitInterest").onclick = function (e) {
   e.preventDefault();
-  modifyName = modifyModal.querySelector('.modal-body input');
+  modifyName = modifyModal.querySelector(".modal-body input");
   console.log(modifyName);
-  fetch("http://localhost:8080/interests", {
+  fetch(`http://localhost:8080/interests/${modifyName.getAttribute("id")}`, {
     method: "PATCH",
     body: JSON.stringify({
       id: modifyName.getAttribute("id"),
@@ -127,5 +127,6 @@ document.getElementById("submitInterest").onclick = function (e) {
       } else {
         console.log("An Error Occurred!");
       }
+      
     });
 };
