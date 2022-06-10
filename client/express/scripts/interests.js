@@ -51,7 +51,8 @@ load_interests = function () {
           e.preventDefault();
           data_id = e.target.getAttribute("data-id");
           data_name = e.target.getAttribute("data-name");
-          modifyName = document.getElementById("modifyName");
+          console.log(data_id,data_name)
+          modifyName = modifyModal.querySelector(".modal-body input");
           modifyName.value = data_name;
           modifyName.setAttribute("id", data_id);
         };
@@ -127,6 +128,6 @@ document.getElementById("submitInterest").onclick = function (e) {
       } else {
         console.log("An Error Occurred!");
       }
-      
+
     });
 };
