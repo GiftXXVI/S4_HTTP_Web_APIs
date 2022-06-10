@@ -32,6 +32,8 @@ load_interests = function () {
         modify.id = "modify_interest";
         modify.dataset.id = liItem.dataset.id;
         modify.dataset.name = liItem.dataset.name;
+        modify.setAttribute("data-bs-toggle", "modal");
+        modify.setAttribute("data-bs-target", "#modifyModal");
         modify.className = "btn btn-sm btn-secondary mx-2";
 
         remove.title = "Delete";
@@ -47,11 +49,14 @@ load_interests = function () {
 
         modify.onclick = function (e) {
           e.preventDefault();
-          console.log("Edit: " + e.target.getAttribute("data-id"));
+          data_id = e.target.getAttribute("data-id");
+          data_name = e.target.getAttribute("data-name");
+          modifyName = document.getElementById("modifyName");
+          modifyName.value = data_name;
+          modifyName.setAttribute("id", data_id);
         };
         remove.onclick = function (e) {
           e.preventDefault();
-          console.log("Delete: " + e.target.getAttribute("data-id"));
           fetch(
             `http://localhost:8080/interests/${e.target.getAttribute(
               "data-id"
@@ -94,7 +99,33 @@ document.getElementById("interest_form").onsubmit = function (e) {
       } else {
         console.log("An Error Occurred!");
       }
+    });
+};
 
-      //window.location.reload(true);
+document.getElementById("submitInterest").onclick = function (e) {
+  e.preventDefault();
+  modifyName = modifyModal.querySelector('.modal-body input');
+  console.log(modifyName);
+  fetch("http://localhost:8080/interests", {
+    method: "PATCH",
+    body: JSON.stringify({
+      id: modifyName.getAttribute("id"),
+      name: modifyName.value,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (jsonResponse) {
+      console.log(jsonResponse);
+      if (jsonResponse["success"] == true) {
+        load_interests();
+        document.getElementById("name").value = "";
+      } else {
+        console.log("An Error Occurred!");
+      }
     });
 };
