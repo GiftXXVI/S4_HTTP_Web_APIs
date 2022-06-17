@@ -30,4 +30,5 @@ curl -i -X DELETE -H 'Origin:localhost:40000' -H 'Content-Type:application/json'
 ### Resources:
 
 https://web.dev/cross-origin-resource-sharing/
+
 https://stackoverflow.com/questions/10636611/how-does-access-control-allow-origin-header-work
