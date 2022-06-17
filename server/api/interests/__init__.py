@@ -9,14 +9,14 @@ cors = CORS(
     interests_blueprint,
     resources=r'*',
     origins=r'*',
-    methods=['OPTIONS','PATCH'])
+    methods=['OPTIONS'])
 
 
 @interests_blueprint.after_request
 def after_request(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS, PATCH' #OPTIONS, PATCH, PUT, DELETE
-    response.headers['Access-Control-Allow-Origin'] = '*'
+    #response.headers['Access-Control-Allow-Methods'] = 'OPTIONS' #OPTIONS, PATCH, PUT, DELETE
+    #response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 
