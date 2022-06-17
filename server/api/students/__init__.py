@@ -9,14 +9,17 @@ cors = CORS(
     students_blueprint,
     resources=r'*',
     origins=r'*',
-    methods=['OPTIONS','PATCH'])
+    methods=['OPTIONS', 'PATCH'])
+
 
 @students_blueprint.after_request
 def after_request(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS, PATCH' #OPTIONS, PATCH, PUT, DELETE
+    # OPTIONS, PATCH, PUT, DELETE
+    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS, PATCH'
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
+
 
 @students_blueprint.route('/students', methods=['GET'])
 def view_students(limit=5, offset=0):
