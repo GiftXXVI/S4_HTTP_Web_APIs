@@ -19,15 +19,7 @@ def create_app() -> Flask:
 app = create_app()
 app.register_blueprint(interests_blueprint)
 app.register_blueprint(students_blueprint)
-cors = CORS(app, resources={r"*": {"origins": "*"}})
 
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Headers',
-                         'Content-Type, Authorization, true')
-    response.headers.add(
-        'Access-Control-Allow-Methods', 'GET, OPTIONS, PATCH, DELETE, POST')
-    return response
 
 
 @app.errorhandler(404)

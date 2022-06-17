@@ -1,8 +1,24 @@
 from flask import Flask, Blueprint, request, abort, jsonify
 from model import db, Interest
 from sqlalchemy.exc import SQLAlchemyError
+from flask_cors import CORS
 
 interests_blueprint = Blueprint('interests_blueprint', __name__)
+
+cors = CORS(
+    interests_blueprint,
+    resources=r'*',
+    origins=r'*',
+    methods=['OPTIONS','PATCH'])
+
+
+@interests_blueprint.after_request
+def after_request(response):
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS, PATCH'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    #response.headers['Allow'] = 'OPTIONS'
+    return response
 
 
 @interests_blueprint.route('/interests', methods=['GET'])

@@ -1,6 +1,7 @@
 load_interests = function () {
   fetch("http://localhost:8080/interests", {
     method: "GET",
+    mode: "cors",
   })
     .then(function (response) {
       return response.json();
@@ -51,7 +52,7 @@ load_interests = function () {
           e.preventDefault();
           data_id = e.target.getAttribute("data-id");
           data_name = e.target.getAttribute("data-name");
-          console.log(data_id,data_name)
+          console.log(data_id, data_name);
           modifyName = modifyModal.querySelector(".modal-body input");
           modifyName.value = data_name;
           modifyName.setAttribute("id", data_id);
@@ -62,7 +63,7 @@ load_interests = function () {
             `http://localhost:8080/interests/${e.target.getAttribute(
               "data-id"
             )}`,
-            { method: "DELETE" }
+            { method: "DELETE", mode: "cors" }
           )
             .then(function (response) {
               return response.json();
@@ -82,6 +83,7 @@ document.getElementById("interest_form").onsubmit = function (e) {
 
   fetch("http://localhost:8080/interests", {
     method: "POST",
+    mode: "cors",
     body: JSON.stringify({
       name: document.getElementById("name").value,
     }),
@@ -109,6 +111,7 @@ document.getElementById("submitInterest").onclick = function (e) {
   console.log(modifyName);
   fetch(`http://localhost:8080/interests/${modifyName.getAttribute("id")}`, {
     method: "PATCH",
+    mode: "cors",
     body: JSON.stringify({
       id: modifyName.getAttribute("id"),
       name: modifyName.value,
@@ -128,6 +131,5 @@ document.getElementById("submitInterest").onclick = function (e) {
       } else {
         console.log("An Error Occurred!");
       }
-
     });
 };
