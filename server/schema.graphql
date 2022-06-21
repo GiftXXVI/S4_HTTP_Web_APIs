@@ -1,0 +1,25 @@
+schema {
+    query: Query
+}
+
+type Interest {
+    id: ID!
+    name: String!
+}
+
+type InterestResult{
+    success: Boolean!
+    errors: [String]
+    interest: Interest!
+}
+
+type InterestsResult{
+    success: Boolean!
+    errors: [String]
+    interests: [Interest!]
+}
+
+type Query {
+    listInterests: InterestsResult!
+    getInterest(id: ID!): InterestResult!
+}
