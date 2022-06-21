@@ -6,24 +6,31 @@ Get Students with Headers
 curl -i -X GET -H 'Origin:localhost:40000' http://127.0.0.1:8080/students
 ```
 ## Interests
-GET Interests with Headers
+### GET Interests with Headers
 ```bash
 curl -i -X GET -H 'Origin:localhost:40000' http://127.0.0.1:8080/interests
 ```
 
-POST Interests with Headers
+### POST Interests with Headers
 ```bash
 curl -i -X POST -H 'Origin:localhost:40000' -H 'Content-Type:application/json' -d '{"name":"Islands of Danger"}' http:
 //127.0.0.1:8080/interests
 ```
 
-PATCH Interests with Headers
+### PATCH Interests with Headers
 ```bash
 curl -i -X PATCH -H 'Origin:localhost:40000' -H 'Content-Type:application/json' -d '{"name":"Islands of Danger P2"}' http://127.0.0.1:8080/interests/27
 ```
 
-DELETE Interests with Headers
+### DELETE Interests with Headers
 ```bash
 curl -i -X DELETE -H 'Origin:localhost:40000' -H 'Content-Type:application/json' -d '{"name":"Islands of Danger P2"}' http://127.0.0.1:8080/interests/2
 7
 ```
+### Resources:
+
+https://web.dev/cross-origin-resource-sharing/
+
+https://stackoverflow.com/questions/10636611/how-does-access-control-allow-origin-header-work
+
+https://realpython.com/flask-blueprint/
