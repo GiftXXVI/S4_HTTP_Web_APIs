@@ -53,12 +53,11 @@ def graphql_server():
 
 @app.errorhandler(404)
 def error_404(error):
-    message = 'not found'
     return jsonify({
         'success': False,
-        'error': 404,
-        'message': message.lower()
-    }), 404
+        'error': error.code,
+        'message': error.description
+    }), error.code
 
 
 @app.errorhandler(401)

@@ -9,7 +9,7 @@ cors = CORS(
     interests_blueprint,
     resources=r'*',
     origins=r'*',
-    methods=['OPTIONS'])
+    methods=['OPTIONS','PATCH'])
 
 
 @interests_blueprint.after_request
@@ -45,7 +45,7 @@ def get_interest(interest_id):
             'num_interests': 1
         })
     else:
-        abort(500)
+        abort(404)
 
 
 @interests_blueprint.route('/interests', methods=['POST'])
