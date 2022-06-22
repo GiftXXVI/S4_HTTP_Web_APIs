@@ -90,12 +90,28 @@ token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDY5MDY5OCIsImlhdCI6MTYz
 try:
 original = jwt.decode(token,secret,algorithms=['HS256'])
 except jwt.ExpiredSignatureError:
-
+  abort(401, 'Token Expired!')
 except jwt.JWTClaimsError:
-
+  abort(403, 'Token lacks required Permissions!')
 except Exception:
-
+  abort(401, 'Authorization Failed!')
 return payload
+
+@app.errorhandler(401)
+def error_401(error):
+    return jsonify({
+        'success': False,
+        'error': 401,
+        'message': error.message.lower()
+    }), 401
+
+@app.errorhandler(403)
+def error_403(error):
+    return jsonify({
+        'success': False,
+        'error': 403,
+        'message': error.message.lower()
+    }), 401
 ```
 
 
