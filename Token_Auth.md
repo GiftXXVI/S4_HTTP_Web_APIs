@@ -87,31 +87,34 @@ from jose import jwt
 
 secret = "&&12:forever:REPEATED:brother:95&&"
 token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDY5MDY5OCIsImlhdCI6MTYzNjM2ODEwOCwiZXhwIjoxNjM2Mzc1MzA4LCJwZXJtaXNzaW9ucyI6WyJnZXQ6c3R1ZGVudHMiXX0.fYf45h6njtBfWQdBbtjupxLUiDw3r1yqGX2Hoj97r4E"
-try:
-original = jwt.decode(token,secret,algorithms=['HS256'])
-except jwt.ExpiredSignatureError:
-  abort(401, 'Token Expired!')
-except jwt.JWTClaimsError:
-  abort(403, 'Token lacks required Permissions!')
-except Exception:
-  abort(401, 'Authorization Failed!')
-return payload
+
+def validate(token, secret):
+    try:
+        payload = jwt.decode(token,secret,algorithms=['HS256'])
+        return payload
+    except jwt.ExpiredSignatureError:
+        abort(401, description='Token Expired!')
+    except jwt.JWTClaimsError:
+        abort(403, description='Token lacks required permissions!')
+    except Exception:
+        abort(401, description='Authentication Failure!')
+
 
 @app.errorhandler(401)
 def error_401(error):
     return jsonify({
         'success': False,
-        'error': 401,
-        'message': error.message.lower()
-    }), 401
+        'error': error.code,
+        'message': error.description
+    }), error.code
 
 @app.errorhandler(403)
 def error_403(error):
     return jsonify({
         'success': False,
-        'error': 403,
-        'message': error.message.lower()
-    }), 401
+        'error': error.code,
+        'message': error.description
+    }), error.code
 ```
 
 
