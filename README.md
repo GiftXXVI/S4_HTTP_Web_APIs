@@ -34,3 +34,5 @@ https://web.dev/cross-origin-resource-sharing/
 https://stackoverflow.com/questions/10636611/how-does-access-control-allow-origin-header-work
 
 https://realpython.com/flask-blueprint/
+
+ 

@@ -6,7 +6,7 @@ from api.interests import interests_blueprint
 from api.students import students_blueprint
 from ariadne import load_schema_from_path, make_executable_schema, graphql_sync, snake_case_fallback_resolvers, ObjectType
 from ariadne.constants import PLAYGROUND_HTML
-from api.queries import listInterests_resolver
+from api.queries import listInterests_resolver, getInterest_resolver
 
 
 def create_app() -> Flask:
@@ -25,6 +25,7 @@ app.register_blueprint(students_blueprint)
 
 query = ObjectType("Query")
 query.set_field("listInterests", listInterests_resolver)
+query.set_field("getInterest", getInterest_resolver)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
