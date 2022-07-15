@@ -13,7 +13,7 @@ def get_config() -> dict:
     db_socket = f'{db_host}:{db_port}'
     conf["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{db_credentials}@{db_socket}/{db_name}'
     if app_env == 'CONTAINER':
-        conf["SQLALCHEMY_DATABASE_URI"] = f'sqlite://'
+        conf["SQLALCHEMY_DATABASE_URI"] = f'sqlite:///data.db'
     conf["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     conf['SECRET_KEY'] = getenv('APP_KEY')
     return conf
